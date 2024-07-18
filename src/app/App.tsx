@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Filters, UsersList } from '@/components'
 import { useUsersStore } from '@/shared/store/users'
-import { classNames } from '@/shared/lib/utils'
+import { classNames } from '@/shared/utils'
 
 import '@/shared/assets/styles/style.scss'
 

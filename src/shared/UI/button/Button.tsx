@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ForwardedRef, ReactNode, forwardRef } from "react"
-import { classNames } from "@/shared/lib/utils"
+import { classNames } from "@/shared/utils"
 
 import c from './button.module.scss'
 

@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { devtools } from 'zustand/middleware'
-import { fetchData } from "../lib/utils"
+import { fetchData } from "../utils"
 
 import type { TUser } from "../types/user"
 import type { TQueryUsersResponse } from "../types/api"
@@ -27,6 +27,7 @@ const initialState: TUsersState = {
   loading: false
 }
 
+// Данные о пользователе, которые нужно запросить
 const dataToQuery = ['firstName', 'lastName', 'maidenName', 'age', 'gender', "phone", "address", "weight", "height", "email"]
 
 export const useUsersStore = create(
@@ -37,8 +38,11 @@ export const useUsersStore = create(
 			
       set({ loading: true })
       try {
+
+        // Создал отдельную функцию fetchData для удобства и работы типизации
         const data = await fetchData<TQueryUsersResponse>('https://dummyjson.com/users?select='+dataToQuery.join(','))
 
+        // Разбивается обьект address на два отдельных ключа
         const users = data.users.reduce<TUser[]>((acc, user) => {
           const { address, ...userData } = user
           acc.push({

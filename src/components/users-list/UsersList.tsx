@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { useUsersStore } from '@/shared/store/users'
-import { classNames } from '@/shared/lib/utils'
-import { COLUMNS_NAME } from '@/shared/constants'
+import { classNames } from '@/shared/utils'
 import { useSortUsers } from './hooks'
 import { Button } from '@/shared/UI'
 
@@ -12,6 +11,16 @@ import c from './userList.module.scss'
 
 export type TSort = { column: string, order: 'desc' | 'asc' } | null
 
+export const COLUMNS_NAME = [
+  { key: 'lastName', value: 'ФИО', sort: true },
+  { key: 'age', value: 'Возраст', sort: true },
+  { key: 'gender', value: 'Пол', sort: true },
+  { key: 'address', value: 'Адрес', sort: true },
+  { key: 'phone', value: 'Номер телефона', sort: false },
+  { key: 'button', value: '', sort: false }
+]
+
+// Для удобства сделал отдельную переменную для вывода данных в модальном окне
 const USER_DATA_KEYS = [
   { key: 'firstName', value: 'Имя' },
   { key: 'lastName', value: 'Фамилия' },
@@ -36,15 +45,13 @@ const UsersList = () => {
   
   const sortedUsers = useSortUsers({ users, sort })
 
+  // Меняет способ сортировки между 3 состояниями
   const sortHandler = ( column: string ) => {
     setSort(prev => {
       let order: 'desc' | 'asc' = 'asc'
       if ( prev?.column === column ) {
-        if ( prev.order === 'desc' ) {
-          return null
-        } else {
-          order = 'desc'
-        }
+        if ( prev.order === 'desc' ) return null
+        order = 'desc'
       }
       return {
         column,
@@ -64,6 +71,7 @@ const UsersList = () => {
               {COLUMNS_NAME.map(column => (
                 <li key={column.key} className={c.title} >
                     <p>{column.value}</p>
+
                     {column.value &&
                      column.sort &&
                       <button onClick={() => sortHandler( column.key )} >
@@ -142,6 +150,7 @@ interface ModalProps {
 const Modal = ({ user, setActive }: ModalProps) => {
 
   const closeModal = ( e: React.MouseEvent<HTMLDivElement, MouseEvent> ) => {
+    // Проверка что клик был по области вне модального окна 
     if ( e.target === e.currentTarget ) {
       closeHandler()
     }

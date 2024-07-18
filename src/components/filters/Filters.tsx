@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { classNames } from '@/shared/lib/utils'
+import { classNames } from '@/shared/utils'
 import { Button, Input } from '@/shared/UI'
 import { useUsersStore } from '@/shared/store/users'
 
 import c from './filters.module.scss'
 
-
+// Использовал enum т.к. ключи используются в нескольких местах
 const enum EFilters {
   firstName='firstName',
   lastName='lastName',
@@ -16,6 +16,7 @@ const enum EFilters {
   city='city',
 }
 
+// Доступные фильтры для выбора в выпадающем списке
 const FILTERS = [
   { key: EFilters.firstName, value: 'Имя' },
   { key: EFilters.lastName, value: 'Фамилия' },
@@ -29,20 +30,23 @@ const FILTERS = [
 
 const Filters = () => {
 
-   const [activeSelect, setActiveSelect] = useState(0)
+  const [activeSelect, setActiveSelect] = useState(0)
 
-   const [filter, setFilter] = useState(FILTERS[0])
-   const [value, setValue] = useState('')
+  const [filter, setFilter] = useState(FILTERS[0])
+  const [value, setValue] = useState('')
 
-   const applyHandler = () => {
-      setActiveSelect(0)
-   }
+  // Выключает все выпадающие списки при onSubmit
+  const applyHandler = () => {
+    setActiveSelect(0)
+  }
 
-   const clearHandler = () => {
-      useUsersStore.getState().fetchUsers()
-   }
+  // Сброс фильтров
+  const clearHandler = () => {
+    useUsersStore.getState().fetchUsers()
+    setValue('')
+  }
 
-   const onSubmit = async ( e: React.FormEvent<HTMLFormElement> ) => {
+  const onSubmit = async ( e: React.FormEvent<HTMLFormElement> ) => {
     e.preventDefault()
 
     useUsersStore.getState().queryUsersWithFilter({
@@ -51,7 +55,7 @@ const Filters = () => {
     })
   }
 
-   return (
+  return (
       <div className={classNames(c.filters, 'block')} >
          
          <p className='title' >Фильтры</p>
