@@ -1,0 +1,30 @@
+
+.input {
+	width: 430px;
+	height: max-content;
+	padding: 16px 12px;
+   
+	background: #F5F5F5;
+	border-radius: 8px;
+
+	color: var(--color-black);
+	font-size: 14px;
+
+	&::placeholder {
+		color: var(--color-grey);
+		font-size: inherit;
+		font-weight: inherit;
+
+    transition: all .3s ease;
+    opacity: .5;
+	}
+
+   &:hover {
+      cursor: text;
+
+      &::placeholder {
+         opacity: 1;
+      }
+   }
+
+}

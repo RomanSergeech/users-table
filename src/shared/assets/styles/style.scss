@@ -1,0 +1,52 @@
+@import "./fonts.scss";
+@import "./reset.scss";
+
+
+:root {
+  --color-black: #000000;
+  --color-dark-grey: #333333;
+  --color-light-grey: #F5F5F5;
+  --color-grey: #808080;
+  --color-white: #FFFFFF;
+  --color-light-pink: #FFE5F4;
+  --color-pink: #FF0095;
+  --color-light-green: #d2f0c3;
+  --color-green: #236900;
+  --color-red: #F53D3D;
+  --color-bg: #F5F5F5;
+}
+
+body {
+  position: relative;
+
+  background-color: var(--color-bg);
+  font-family: 'Regular';
+
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+.page_body {
+  display: grid;
+  gap: 30px;
+}
+
+._container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 15px;
+}
+
+.title {
+  color: var(--color-black);
+  font-family: 'Roadradio';
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.block {
+  padding: 20px 16px;
+  background-color: #fff;
+  border-radius: 16px;
+}

@@ -1,0 +1,207 @@
+
+.list {
+  display: grid;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.table {
+  min-width: 900px;
+  display: grid;
+  gap: 8px;
+  
+  .table_list { 
+     display: grid;
+     grid-template-columns: repeat(6, 1fr);
+
+     &:nth-of-type(2n) {
+        & > li {
+           background-color: var(--color-light-grey);
+        }
+     }
+
+     & > li {
+       display: flex;
+       align-items: center;
+        padding: 8px 15px;
+        font-size: 12px;
+   
+        &:not(:last-child) {
+           border-right: 1px solid var(--color-grey);
+        }
+   
+        &:first-child {
+           border-radius: 8px 0 0 8px;
+        }
+        &:last-child {
+           border-radius: 0 8px 8px 0;
+        }
+   
+        &.title {
+           display: flex;
+           justify-content: space-between;
+           background-color: var(--color-light-green);
+           padding: 15px;
+   
+           color: var(--color-green);
+           text-transform: uppercase;
+           font-family: 'SemiBold';
+   
+           white-space: nowrap;
+   
+           &:not(:last-child) {
+              border-right: 1px solid var(--color-green);
+           }
+   
+           button {
+              display: flex;
+              justify-content: flex-end;
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+   
+              &:active {
+                 svg {
+                    transform: scale(0.9);
+                 }
+              }
+   
+              svg {
+                 path {
+                    opacity: .5;
+                 }
+   
+                 &.desc {
+                    path:last-child {
+                       opacity: 1;
+                    }
+                 }
+                 &.asc {
+                    path:first-child {
+                       opacity: 1;
+                    }
+                 }
+              }
+   
+           }
+        }
+   
+        &.empty_data {
+           grid-column: 1/7;
+           
+           display: flex;
+           justify-content: center;
+   
+           border-radius: 8px;
+   
+           color: var(--color-grey);
+           font-size: 12px;
+           font-family: 'Medium';
+        }
+   
+        &.loader {
+          color: transparent;
+        }
+   
+     }
+  }
+
+
+}
+
+.description_button {
+  min-width: auto;
+  width: 100%;
+  padding: 12px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .8);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ::-webkit-scrollbar {
+     width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+     background-color: var(--color-light-grey);
+     border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+     background-color: var(--color-pink);
+     border-radius: 4px;
+  }
+
+  .modal_body {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    display: grid;
+    gap: 20px;
+
+    padding: 20px;
+
+     .close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 8px;
+        top: 20px;
+
+        cursor: pointer;
+
+        &::before, &::after {
+           content: '';
+           position: absolute;
+           width: 12px;
+           height: 2px;
+           background-color: var(--color-grey);
+        }
+        &::before {
+           transform: rotate(45deg);
+        }
+        &::after {
+           transform: rotate(-45deg);
+        }
+     }
+
+    .data {
+      display: grid;
+
+      font-family: 'Regular';
+      font-size: 14px;
+
+      
+      li {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        padding: 10px;
+        border-radius: 8px;
+        
+        &:nth-of-type(2n-1) {
+          background-color: var(--color-light-grey);
+        }
+        
+      }
+
+      span {
+        color: var(--color-green);
+        font-family: 'Medium';
+        font-size: 12px;
+      }
+    }
+
+  }
+}
